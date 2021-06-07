@@ -53,6 +53,7 @@ links = crawling(website, link_class)
 
 
 def check(update, context):
+    print("checking...")
     try:
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
