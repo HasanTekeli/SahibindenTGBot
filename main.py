@@ -67,6 +67,7 @@ def check(update, context):
         title = item[0].decode('utf-8')
         link = item[1]
         message = title + " " + link
+        print(message)
         farm_exists = search_db.execute('SELECT farm FROM farms WHERE farm = %s', [title])
         if not farm_exists:
             print("farm not exist")
