@@ -64,6 +64,7 @@ def check(update, context):
         print("Something went wrong with the db")
 
     for item in links:
+        print(item)
         title = item[0].decode('utf-8')
         link = item[1]
         message = title + " " + link
