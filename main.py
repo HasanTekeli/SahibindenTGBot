@@ -56,11 +56,12 @@ def check(update, context):
     print("checking...")
     try:
         DATABASE_URL = os.environ['DATABASE_URL']
+        print(DATABASE_URL)
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         search_db = conn.cursor()
         search_db.execute('CREATE TABLE IF NOT EXISTS farms (id SERIAL, farm TEXT NOT NULL)')
     except:
-        print("Something went worng with the db")
+        print("Something went wrong with the db")
 
     for item in links:
         title = item[0].decode('utf-8')
@@ -68,10 +69,12 @@ def check(update, context):
         message = title + " " + link
         farm_exists = search_db.execute('SELECT farm FROM farms WHERE farm = %s', [title])
         if not farm_exists:
+            print("farm not exist")
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
             search_db.execute('INSERT INTO farms (farm) VALUES (%s);', [title])
             conn.commit()
         else:
+            print("farm exists")
             continue
 
     # end SQL connection
