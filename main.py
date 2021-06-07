@@ -60,7 +60,7 @@ def check(update, context):
         search_db = conn.cursor()
         search_db.execute('CREATE TABLE IF NOT EXISTS farms (id SERIAL, farm TEXT NOT NULL)')
     except:
-        pass
+        print("Something went worng with the db")
 
     for item in links:
         title = item[0].decode('utf-8')
