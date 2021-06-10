@@ -83,10 +83,12 @@ def insert_items(farm_list, context, update):
             sql_res = cur.fetchone()
 
             if not sql_res == (True,):
+                print("not true")
                 cur.execute(sql_exp, (exp, link,))
                 message_to_send = exp + " " + link
                 send_message(context, update, message_to_send)
             else:
+                print("true")
                 message_to_send = "Yeni bir ilan bulunamadı."
 
         send_message(context, update, message_to_send)
