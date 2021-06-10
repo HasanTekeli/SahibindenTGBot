@@ -53,7 +53,7 @@ def connect_db():
     conn = None
     try:
         DATABASE_URL = os.environ['DATABASE_URL']
-        conn = psycopg2.connect(DATABASE_URL)
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         cur = conn.cursor()
         return cur
     except (Exception, psycopg2.DatabaseError) as err:
@@ -112,19 +112,17 @@ def create_tables():
             ad_link VARCHAR(255) NOT NULL
         )
         """)
-    conn = None
+
     try:
         cur = connect_db()
         cur.execute(commands)
         # close communication with the PostgreSQL database server
         cur.close()
         # commit the changes
-        conn.commit()
+        #conn.commit()
     except (Exception, psycopg2.DatabaseError) as error:
         print("db_create:", error)
-    finally:
-        if conn is not None:
-            conn.close()
+
 
 
 def start(update, context):
