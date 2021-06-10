@@ -73,16 +73,17 @@ def insert_items(farm_list, context, update):
     conn = None
     try:
         DATABASE_URL = os.environ['DATABASE_URL']
-        print("DATABASE_URL: ", DATABASE_URL)
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-        print("conn: ", conn)
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
         message_to_send = "Veritabanı şu an boş."
         for exp, link in farm_list:
+            print("exp: ", exp)
+            print("link: ", link)
             cur.execute(sql_select, (link,))
             sql_res = cur.fetchone()
+            print(sql_res)
 
             if not sql_res == (True,):
                 cur.execute(sql_exp, (exp, link,))
