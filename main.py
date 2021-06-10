@@ -53,7 +53,7 @@ def connect_db():
     conn = None
     try:
         DATABASE_URL = os.environ['DATABASE_URL']
-        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        conn = psycopg2.connect(DATABASE_URL)
         cur = conn.cursor()
         return cur
     except (Exception, psycopg2.DatabaseError) as err:
