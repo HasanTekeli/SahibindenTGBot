@@ -37,6 +37,7 @@ def crawling():
     class_members = content.find_all(class_=link_class)
 
     for i in class_members:
+        print(i)
         iutf8 = i.get("title").encode("utf-8")
 
         ad_titles.append(iutf8)
