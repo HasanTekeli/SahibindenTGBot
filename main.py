@@ -73,7 +73,9 @@ def insert_items(farm_list, context, update):
     conn = None
     try:
         DATABASE_URL = os.environ['DATABASE_URL']
+        print("DATABASE_URL: ", DATABASE_URL)
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        print("conn: ", conn)
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
@@ -83,12 +85,12 @@ def insert_items(farm_list, context, update):
             sql_res = cur.fetchone()
 
             if not sql_res == (True,):
-                print("not true")
                 cur.execute(sql_exp, (exp, link,))
                 message_to_send = exp + " " + link
+                print("if not: ", message_to_send)
                 send_message(context, update, message_to_send)
             else:
-                print("true")
+                print("else: ", message_to_send)
                 message_to_send = "Yeni bir ilan bulunamadı."
 
         send_message(context, update, message_to_send)
