@@ -43,6 +43,7 @@ def crawling():
         ad_links.append(mainpage + i.get("href"))
 
     listzip = list(zip(ad_titles, ad_links))
+    print(listzip)
     return listzip
 
 
