@@ -77,6 +77,7 @@ def insert_items(farm_list, context, update):
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
+        message_to_send = "Veritabanı şu an boş."
         for exp, link in farm_list:
             cur.execute(sql_select, (link,))
             sql_res = cur.fetchone()
